@@ -36,4 +36,4 @@ coverage/
 # React build folder
 client/build/
 
-public
+public/
