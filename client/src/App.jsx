@@ -11,8 +11,8 @@ function App() {
     const fetchPeople = useCallback(async (pageNumber) => {
         console.log(`Fetching people data for page: ${pageNumber}`); // Log the page being fetched
         try {
-            // Fetch paginated people data from the backend API
-            const response = await axios.get(`http://localhost:5000/api/people?page=${pageNumber}&limit=100`);
+            // Fetch paginated people data from the backend newApi
+            const response = await axios.get(`http://localhost:5000/newApi/people?page=${pageNumber}&limit=100`);
             if (response.data && Array.isArray(response.data)) {
                 console.log(`Successfully fetched ${response.data.length} people from the server.`); // Log success message with number of records fetched
                 return response.data;
@@ -53,7 +53,7 @@ function App() {
         if (window.confirm('האם אתה בטוח שברצונך למחוק את נתיב התמונה הזו מבסיס הנתונים?')) { // Confirm with the user before deleting
             try {
                 // Send a POST request to delete the specified image path from the database
-                const response = await axios.post('http://localhost:5000/api/delete-path', { id, column });
+                const response = await axios.post('http://localhost:5000/newApi/delete-path', { id, column });
                 if (response.data.success) {
                     console.log(`Successfully deleted image path for person ID: ${id}, column: ${column}`); // Log success message
                     alert('נתיב התמונה נמחק בהצלחה מבסיס הנתונים'); // Alert user that the image path was successfully deleted
@@ -86,7 +86,7 @@ function App() {
         }
 
         try {
-            const response = await axios.post('http://localhost:5000/api/set-good-pic', { id: targetId, imagePath });
+            const response = await axios.post('http://localhost:5000/newApi/set-good-pic', { id: targetId, imagePath });
             if (response.data.success) {
                 console.log(`Successfully set good image for person ID: ${targetId}`); // Log success message
                 setPeople((prevPeople) =>
@@ -109,7 +109,7 @@ function App() {
         console.log(`Attempting to delete good image for person ID: ${id}`); // Log the ID of the person whose good image is being deleted
         if (window.confirm('האם אתה בטוח שברצונך למחוק את התמונה הנכונה מבסיס הנתונים?')) { // Confirm with the user before deleting
             try {
-                const response = await axios.post('http://localhost:5000/api/delete-path', { id, column: 'good_pics' });
+                const response = await axios.post('http://localhost:5000/newApi/delete-path', { id, column: 'good_pics' });
                 if (response.data.success) {
                     console.log(`Successfully deleted good image for person ID: ${id}`); // Log success message
                     alert('התמונה הנכונה נמחקה בהצלחה מבסיס הנתונים'); // Alert user that the good image was successfully deleted

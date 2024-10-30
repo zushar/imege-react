@@ -26,7 +26,7 @@ async function connectToDatabase() {
 }
 
 // Endpoint to get paginated people images data from the database
-app.get('/api/people', async (req, res) => {
+app.get('/newApi/people', async (req, res) => {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 100;
     const offset = (page - 1) * limit;
@@ -56,7 +56,7 @@ app.get('/api/people', async (req, res) => {
 });
 
 // Endpoint to set the "good" image for a person
-app.post('/api/set-good-pic', async (req, res) => {
+app.post('/newApi/set-good-pic', async (req, res) => {
     const { id, imagePath } = req.body; // Extract id and image path from request
     console.log(`Received request to set good image for person ID: ${id}, imagePath: ${imagePath}`);
     try {
@@ -73,7 +73,7 @@ app.post('/api/set-good-pic', async (req, res) => {
 });
 
 // Endpoint to delete an image path from the database
-app.post('/api/delete-path', async (req, res) => {
+app.post('/newApi/delete-path', async (req, res) => {
     const { id, column } = req.body; // Extract id and column name from request body
     console.log(`Received request to delete image path for person ID: ${id}, column: ${column}`);
     try {
@@ -92,5 +92,5 @@ app.post('/api/delete-path', async (req, res) => {
 // Start the server and connect to the database
 app.listen(5000, async () => {
     await connectToDatabase();
-    console.log('Server is running on http://localhost:5000');
+    console.log('Server is running on http://localhost:5001');
 });
